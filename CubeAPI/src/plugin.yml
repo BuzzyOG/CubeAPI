@@ -1,0 +1,5 @@
+name: CubeAPI
+version: 1.0
+main: com.cubemc.api.CubeAPI
+author: WilliamTiger
+website: www.cube-mc.com
