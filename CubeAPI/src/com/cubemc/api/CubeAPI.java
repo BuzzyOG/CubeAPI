@@ -6,6 +6,9 @@ import com.cubemc.api.Commands.PluginsOverwrite;
 import com.cubemc.api.Commands.Random.RandomCommandManager;
 import com.cubemc.api.Punish.PunishManager;
 import com.cubemc.api.Ranks.RankManager;
+import com.cubemc.api.Shop.ConfirmationListener;
+import com.cubemc.api.Shop.ItemListener;
+import com.cubemc.api.Shop.PageListener;
 import com.cubemc.api.Shop.PurchaseHistory;
 import com.cubemc.api.Utils.MySQL;
 import com.cubemc.api.game.GameManager;
@@ -54,6 +57,9 @@ public class CubeAPI extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new PluginsOverwrite(), this);
+        Bukkit.getPluginManager().registerEvents(new PageListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ItemListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ConfirmationListener(), this);
 
         registerGameListeners();
 
