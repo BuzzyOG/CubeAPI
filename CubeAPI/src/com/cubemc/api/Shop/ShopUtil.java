@@ -50,6 +50,38 @@ public class ShopUtil {
         }
     }
 
+    public static void makeSilentPurchaseNoCurrencyInvolved(ShopItem i, Player p){
+        String catName = i.getCategory().replaceAll(" ", "_");
+        String tableName = catName + "_Shop_Category";
+        createTable(i);
+        try {
+            createTable(i);
+            List<String> packages = new ArrayList<String>();
+            String packageString = MySQL.getResultsString("SELECT * FROM " + tableName + " WHERE UUID='" + UUIDh.get(p) + "';", "Packages");
+            if (!(packageString.equals("LOL"))) {
+                String[] array = packageString.split(",");
+                for (String s : array){
+                    packages.add(s);
+                }
+            }
+            String newPackage = i.getName();
+            newPackage = newPackage.replaceAll(" ", "-");
+            packages.add(newPackage);
+            String packSerial = "";
+            for (String s : packages){
+                if (packSerial.equals("")){
+                    packSerial = s;
+                    continue;
+                }
+                packSerial = packSerial + "," + s;
+            }
+            MySQL.connectToDB("INSERT INTO " + tableName + " (UUID, Packages) VALUES ('" + UUIDh.get(p) + "', '" + packSerial + "') ON DUPLICATE KEY UPDATE Packages='" + packSerial + "';");
+            return;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public static boolean hasBoughtItem(ShopItem i, Player p){
         try {
             String catName = i.getCategory().replaceAll(" ", "_");
@@ -95,7 +127,7 @@ public class ShopUtil {
         String tableName = catName + "_Shop_Category";
         try {
             MySQL.connectToDB("CREATE TABLE IF NOT EXISTS " + tableName + " (UUID VARCHAR(200), Packages VARCHAR(5000), PRIMARY KEY (UUID));");
-            System.out.println("[MYSQL] Created table " + tableName + ".");
+            System.out.println("[MYSQL] Created table if not exists " + tableName + ".");
         }catch (Exception e){
             e.printStackTrace();
         }

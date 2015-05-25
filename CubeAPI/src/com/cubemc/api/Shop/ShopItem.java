@@ -58,6 +58,7 @@ public class ShopItem implements Serializable {
         this.canBePurchasedAgain = canBePurchasedAgain;
 
         allItems.add(this);
+        ShopUtil.createTable(this);
     }
 
 
