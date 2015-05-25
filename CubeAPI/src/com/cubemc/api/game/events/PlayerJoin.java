@@ -36,17 +36,18 @@ public class PlayerJoin implements Listener {
     public void onJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
         RankManager.setupRank(p);
+        e.setJoinMessage(null);
 
         if (CubeAPI.getGameManager().getGame() == null) return;
 
         if (CubeAPI.getGameManager().getGame().getState().equals(GameState.STARTING) || CubeAPI.getGameManager().getGame().getState().equals(GameState.WAITING)){
             Bukkit.broadcastMessage(M.game(p.getDisplayName() + " §7joined the game."));
+            p.getInventory().clear();
             CubeAPI.getGameManager().getKitManager().giveItem(p);
             if (CubeAPI.getGameManager().getMapManager().isVotingEnabled()){
                 CubeAPI.getGameManager().getMapManager().giveItem(p);
             }
             CubeAPI.getGameManager().getLobbyManager().sendPlayerToLobby(p);
-            p.getInventory().clear();
             p.getInventory().setArmorContents(null);
             p.setFoodLevel(20);
             p.setHealth(20);

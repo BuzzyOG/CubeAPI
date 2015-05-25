@@ -39,7 +39,7 @@ public class MapSelectorListener implements Listener {
         if (e.getCurrentItem().getItemMeta() == null) return;
         if (e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
         String name = e.getCurrentItem().getItemMeta().getDisplayName();
-        if (!(name.startsWith("§9§lKIT"))){
+        if (!(name.startsWith("§9§lMAP"))){
             return;
         }
         e.setCancelled(true);
@@ -57,6 +57,7 @@ public class MapSelectorListener implements Listener {
             if (RankManager.isRankHighEnough(p, Rank.VIP)){
                 CubeAPI.getGameManager().getMapManager().playerVotes.put(p.getName(), map);
                 Bukkit.broadcastMessage(M.game(p.getDisplayName() + " §7changed their vote to §e" + map.getName() + "§7."));
+                p.closeInventory();
                 return;
             }else{
                 p.sendMessage(M.game("§cYou need to be a donor to change your vote."));
@@ -65,6 +66,7 @@ public class MapSelectorListener implements Listener {
         }else{
             CubeAPI.getGameManager().getMapManager().playerVotes.put(p.getName(), map);
             Bukkit.broadcastMessage(M.game(p.getDisplayName() + " §7voted for §e" + map.getName() + "§7."));
+            p.closeInventory();
             return;
         }
     }

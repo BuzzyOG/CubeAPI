@@ -64,7 +64,7 @@ public class MapManager extends Module {
         ItemStack i = new ItemStack(Material.BOOK, 1);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName("§6§lMAP SELECTOR §7(Click to open)");
-        im.setLore(Arrays.asList("Opens the map voting menu."));
+        im.setLore(Arrays.asList("§eOpens the map voting menu."));
         i.setItemMeta(im);
         p.getInventory().addItem(i);
     }
@@ -112,6 +112,7 @@ public class MapManager extends Module {
             e.printStackTrace();
             Bukkit.broadcastMessage(M.game("§cMAP SETUP FAILED."));
             Bukkit.shutdown();
+            return;
         }
         Bukkit.broadcastMessage(M.game("§oFolder copied."));
         Bukkit.broadcastMessage(M.game("§oLoading world into server...."));

@@ -2,7 +2,6 @@ package com.cubemc.api.game;
 
 import com.cubemc.api.Core.Module;
 import com.cubemc.api.CubeAPI;
-import com.cubemc.api.Utils.BungeeUtil;
 import com.cubemc.api.Utils.M;
 import com.cubemc.api.game.events.UpdateEvent;
 import com.cubemc.api.game.kits.KitManager;
@@ -86,6 +85,10 @@ public class GameManager extends Module {
         perkManager = new PerkManager((JavaPlugin)CubeAPI.getPlugin());
         lobbyManager = new LobbyManager((JavaPlugin)CubeAPI.getPlugin());
         spectateManager = new SpectateManager((JavaPlugin)CubeAPI.getPlugin());
+
+        for (GameTeam team : game.getTeams()){
+            getTeamManager().registerTeam(team);
+        }
 
         this.game = game;
         getMapManager().giveSuppliedMaps(maps);
@@ -173,7 +176,11 @@ public class GameManager extends Module {
             @Override
             public void run() {
                 for (Player p : Bukkit.getOnlinePlayers()){
-                    BungeeUtil.send(p, "hub");
+                    p.kickPlayer("§3Hey thanks for testing!\n\n" +
+                            "§bAt the moment all I'm doing is testing\n" +
+                            "§bSo I had to kick you for now.\n\n" +
+                            "§6Normally you'll be sent to the hub :D");
+                    //BungeeUtil.send(p, "hub");
                 }
 
                 getMapManager().deleteOldMap(getGame().getCurrentMap()); // Delete the old map.

@@ -19,14 +19,12 @@ public class LobbyManager extends Module {
         super("Lobby Manager", plugin);
     }
 
-    private Location spawnPoint = new Location(Bukkit.getWorld("lobby"), 0, 0, 0);
-
     public void sendPlayerToLobby(Player p){
         if (Bukkit.getWorld("lobby") == null){
             //Bukkit.broadcastMessage("world null");
             return;
         }
-        p.teleport(new Location(Bukkit.getWorld("lobby"), 0, 0, 0));
+        p.teleport(new Location(Bukkit.getWorld("lobby"), 0, 65, 0));
     }
 
 }

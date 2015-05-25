@@ -45,8 +45,8 @@ public class KitManager extends Module {
     }
 
     public void setSelectedKit(Player p, GameKit kit){
-        playerKits.put(p.getName(), kit);
         M.reg("You equipped kit §e§l" + kit.getName() + "§7.");
+        playerKits.put(p.getName(), kit);
         return;
     }
 

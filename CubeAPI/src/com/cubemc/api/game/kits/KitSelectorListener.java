@@ -60,6 +60,7 @@ public class KitSelectorListener implements Listener {
 
             if (purchased == true){
                 CubeAPI.getGameManager().getKitManager().setSelectedKit(p, kit);
+                p.closeInventory();
                 return;
             }else{
                 p.sendMessage(M.err(CubeAPI.getGameManager().getGame().getShortName(), "You don't own this kit."));
