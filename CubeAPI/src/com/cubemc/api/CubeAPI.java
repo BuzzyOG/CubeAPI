@@ -7,6 +7,7 @@ import com.cubemc.api.Commands.Random.RandomCommandManager;
 import com.cubemc.api.Punish.PunishManager;
 import com.cubemc.api.Ranks.RankManager;
 import com.cubemc.api.Shop.PurchaseHistory;
+import com.cubemc.api.Utils.MySQL;
 import com.cubemc.api.game.GameManager;
 import com.cubemc.api.game.events.PlayerJoin;
 import com.cubemc.api.game.events.PlayerLeave;
@@ -65,6 +66,8 @@ public class CubeAPI extends JavaPlugin {
         }else{
             Bukkit.broadcastMessage("No Lobby Exists. None created.");
         }
+
+        mysqlConfig();
     }
 
     public static Plugin getPlugin(){
@@ -116,5 +119,14 @@ public class CubeAPI extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayersDropAndPickup(), this);
         Bukkit.getPluginManager().registerEvents(new PlayersBreakAndPlace(), this);
         //Bukkit.getPluginManager().registerEvents(new UseBuckets(), this); //TODO
+    }
+
+    public void mysqlConfig(){
+        saveDefaultConfig();
+        MySQL.username = getConfig().getString("mysql.username");
+        MySQL.password = getConfig().getString("mysql.password");
+        MySQL.host = getConfig().getString("mysql.host");
+        MySQL.port = getConfig().getString("mysql.port");
+        MySQL.database = getConfig().getString("mysql.database");
     }
 }

@@ -12,9 +12,12 @@ public class MySQL {
 
     public MySQL(){}
 
-    private static String username = "root";
-    private static String password = "";
-    private static String url = "jdbc:mysql://localhost:3306/CubeAPI";
+    public static String username = "root";
+    public static String password = "";
+    public static String host = "localhost";
+    public static String port = "3306";
+    public static String database = "CubeAPI";
+    public static String url = "jdbc:mysql://" + host + ":" + port + "/" + database;
 
     public static void connectToDB(String query) throws SQLException{
         Connection con = DriverManager.getConnection(url, username, password);
